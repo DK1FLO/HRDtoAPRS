@@ -75,9 +75,19 @@ def sendframe(commandstring):
 # Get the frequency from HRD and send it to APRS service
 def get_frequency_and_send_APRS():
     frequency = sendframe("[" + str(radiostring[0:3]) + "] get frequencies")
-    print ("QRG VFO1:" + frequency[0:frequency.index('-')] + " QRG VFO2:" + frequency[frequency.index('-')+1:])
-    AIS.sendall("DO1FPI>APRS,TCPIP*,qAC,SEVENTH:qAC,T2ERFURT:!" + config.get('Position', 'Pos_N') + "/" + config.get('Position', 'Pos_E') + "- " + config.get('Main config', 'APRS_Desc'))
-    AIS.sendall("DO1FPI>APRS,TCPIP*:>Currently QRV - QRG VFO1:" + frequency[0:frequency.index('-')] + " QRG VFO2:" + frequency[frequency.index('-')+1:] )
+
+    # Extract frequencies out of answer string
+    frequency_vfo1 = frequency[0:frequency.index('-')]
+    frequency_vfo2 = frequency[frequency.index('-')+1:]
+
+    # Convert to MHz for readability
+    string_vfo1 = '{:f}'.format(float(int(frequency_vfo1))/1000000.0) + " MHz"
+    string_vfo2 = '{:f}'.format(float(int(frequency_vfo2))/1000000.0) + " MHz"
+
+    
+    print ("QRG VFO1:" + string_vfo1 + " QRG VFO2:" + string_vfo2)
+    AIS.sendall(config.get('Main config', 'APRS_User') + ">APRS,TCPIP*,qAC,SEVENTH:qAC,T2ERFURT:!" + config.get('Position', 'Pos_N') + "/" + config.get('Position', 'Pos_E') + "- " + config.get('Main config', 'APRS_Desc'))
+    AIS.sendall(config.get('Main config', 'APRS_User') + ">APRS,TCPIP*:>Currently QRV - QRG VFO1: " + string_vfo1 + " | QRG VFO2: " +  string_vfo2)
     
 # init
 
