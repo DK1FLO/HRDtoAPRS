@@ -33,4 +33,4 @@ The HRDtoAPRS script asks you to input some basic data, like:
 - Callsign
 - Password for APRS
 - Description (I use "Flo out of Gerolfing", where Flo is my name and Gerolfing my town)
-- Position
+- Position (please use the exact given format, otherwise APRS will not recognize your position)
