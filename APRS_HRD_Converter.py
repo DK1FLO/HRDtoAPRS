@@ -15,8 +15,6 @@ config = ConfigParser()
 # Client which is used to connect
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-
-
 # save the config
 def save_config():
     with open(nameOfConfig, 'w') as f:
@@ -89,8 +87,6 @@ def get_frequency_and_send_APRS():
     AIS.sendall(config.get('Main config', 'APRS_User') + ">APRS,TCPIP*,qAC,SEVENTH:qAC,T2ERFURT:!" + config.get('Position', 'Pos_N') + "/" + config.get('Position', 'Pos_E') + "- " + config.get('Main config', 'APRS_Desc'))
     AIS.sendall(config.get('Main config', 'APRS_User') + ">APRS,TCPIP*:>Currently QRV - QRG VFO1: " + string_vfo1 + " | QRG VFO2: " +  string_vfo2)
     
-# init
-
 # Check, if INI file exists. If not, create it and ask user for Callsign/PW
 init_of_config()
 
@@ -110,7 +106,6 @@ while 1:
     get_frequency_and_send_APRS()
     
     time.sleep(60)
-    
 
 
 
