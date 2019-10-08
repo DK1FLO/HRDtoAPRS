@@ -3,7 +3,7 @@ A simple python script which bridges HRD and APRS with the VFO frequency
 
 # Installation
 
-## Installation of Phython
+## Installation of Python
 In order to use this script, you need python installed on your local machine.
 Python can be downloaded here: https://www.python.org/downloads/
 
